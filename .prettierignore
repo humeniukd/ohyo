@@ -1,0 +1,15 @@
+/.history/
+/.idea/
+/build/
+/coverage/
+/log/
+/node_modules/
+/public/assets/
+/public/vendor/
+/revolut-api-proxy/
+/storybook-static/
+/styleguide/
+
+/package-lock.json
+/package.json
+/yarn.lock

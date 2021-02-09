@@ -1,0 +1,1 @@
+export { getConfigValue } from './getConfigValue'

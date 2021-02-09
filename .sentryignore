@@ -1,0 +1,9 @@
+build
+coverage
+cypress
+node_modules
+revolut-api-proxy
+
+src/scripts
+
+**/__tests__/**

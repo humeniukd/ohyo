@@ -1,0 +1,7 @@
+{
+  "apiPackage": "api",
+  "enumPropertyNaming": "original",
+  "modelPackage": "model",
+  "removeEnumValuePrefix": false,
+  "withSeparateModelsAndApi": true
+}

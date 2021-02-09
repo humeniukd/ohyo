@@ -1,0 +1,5 @@
+export { renderApp } from './renderApp'
+export { setupAxios } from './setupAxios'
+export { setupI18n } from './setupI18n'
+export { setupSentry } from './setupSentry'
+export { setupErrorHandler } from './setupErrorHandler'

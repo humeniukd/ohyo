@@ -1,0 +1,8 @@
+[auth]
+# "retail-web-account-release" integration:
+# https://sentry.io/settings/revolut/developer-settings/retail-web-account-release-1dc96a/
+token=d3713f81650245e98418a19f1d5849428e7b69946b68471f802b9e0d558f0b85
+
+[defaults]
+org=revolut
+project=retail-web-account

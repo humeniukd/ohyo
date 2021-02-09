@@ -1,0 +1,93 @@
+<html lang="en"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Connect</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 70px;
+            font: 14px/1.4 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Garuda, Verdana, Tahoma, sans-serif;
+            color: #333;
+            text-align: center
+        }
+    </style>
+    <script>function set(key, value, attributes) {
+      key = encodeURIComponent(key)
+          .replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent)
+          .replace(/[()]/g, escape)
+
+      value = encodeURIComponent(value).replace(
+          /%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g,
+          decodeURIComponent
+      )
+
+      var stringifiedAttributes = ''
+      for (var attributeName in attributes) {
+        if (!attributes[attributeName]) {
+          continue
+        }
+
+        stringifiedAttributes += '; ' + attributeName
+
+        if (attributes[attributeName] === true) {
+          continue
+        }
+        stringifiedAttributes += '=' + attributes[attributeName].split(';')[0]
+      }
+
+      document.cookie = key + '=' + value + stringifiedAttributes
+    }</script>
+  </head>
+  <body>
+    <div id="message">This popup should automatically close in a few seconds</div>
+    <script type="text/javascript">
+const MESSAGE_TYPE = 'SigninSuccessful'
+function storeToken(payload) {
+  set('lou_broadcast', JSON.stringify({
+    ts: Date.now(),
+    payload: {
+      data: {
+        type: MESSAGE_TYPE,
+        payload,
+      }
+    }
+  }), {
+    sameSite: 'Strict',
+    secure: !/localhost/.test(window.location.origin)
+  })
+  sessionStorage.setItem('lou_secureCode', JSON.stringify({
+    ts: Date.now(),
+    payload
+  }))
+  end()
+}
+function connect() {
+    var params = getQueryParams(),
+        token = params.id_token;
+    token && storeToken(token, true)
+}
+
+function end() {
+  window.location.href = '/start'
+}
+var getQueryParams,
+    parentWindow = window.parent || window.opener;
+getQueryParams = function () {
+  var params;
+  return function () {
+    if (!params) {
+      params = {};
+      for (
+          var parts,
+              query = window.location.search.substring(1) + "&" + window.location.hash.substring(1),
+              regex = /([^&=]+)=([^&]*)/g;
+          parts = regex.exec(query);
+      )
+        params[window.decodeURIComponent(parts[1])] = window.decodeURIComponent(parts[2])
+    }
+    return params
+  }
+}(),
+connect();
+    </script>
+  </body>
+</html>
