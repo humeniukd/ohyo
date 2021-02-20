@@ -1,12 +1,10 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import { Layout } from 'components/Layout'
 import { useTranslation } from 'react-i18next'
 import { useStyles } from './styled'
 import {TrackDetails} from "../Upload/TrackDetails";
+import {Preview} from "components/ImageCrop/Preview";
 
 export const Start = () => {
     const classes = useStyles()
@@ -19,6 +17,7 @@ export const Start = () => {
             container
             className={classes.grid}
         >
+            <Preview />
             <TrackDetails key={'adsf'} />
         </Grid>
     </Layout>
