@@ -11,7 +11,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { Link } from "components/Link";
+import { Link } from 'react-router-dom'
 import Menu from "./Menu";
 import { useStyles } from "./styled";
 
@@ -84,10 +84,15 @@ export const Topbar: FC<Props> = ({ noTabs }) => {
                     value={value}
                     indicatorColor="primary"
                     textColor="primary"
-                    onChange={(_, id) => setValue(id)}
+                    onChange={(_, id) => {
+                      console.log('asdf', id)
+                      setValue(id)
+                    }}
                   >
                     {Menu.map((item, index) => (
-                      <Tab key={index}
+                      <Tab key={item.pathname}
+                        component={Link}
+                        to={item.pathname}
                         classes={{ root: classes.tabItem }}
                         label={item.label}
                       />

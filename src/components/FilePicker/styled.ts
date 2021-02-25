@@ -8,8 +8,7 @@ export const useStyles = makeStyles((theme) => ({
         cursor: 'pointer',
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(8, 0, 6),
-        display: 'inline-block',
-        marginRight: theme.spacing(2),
+        padding: theme.spacing(.5, 1),
+        display: 'inline-block'
     }
 }))

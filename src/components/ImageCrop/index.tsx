@@ -5,21 +5,19 @@ import {Button} from "@material-ui/core";
 
 type Props = {
     file: File,
-    onCrop: (url: string, file: Blob) => void
+    onCrop: (file?: Blob) => void
 }
 
 export const ImageCrop: FC<Props> = ({file, onCrop}) => {
     const [crop, setCrop] = useState<Crop>({
       unit: '%',
-      width: 30,
-      aspect: 16 / 9,
+      height: 100,
+      aspect: 1,
     })
     const [src, setSrc] = useState<string|null>()
     const [croppedImage, setCroppedImage] = useState<Blob>()
-    const [croppedImageUrl, setCroppedImageUrl] = useState<string>()
     const imageRef = useRef<HTMLImageElement>()
 
-    let fileUrl: string
 
     useEffect(() => {
       const reader = new FileReader()
@@ -67,15 +65,12 @@ export const ImageCrop: FC<Props> = ({file, onCrop}) => {
                 console.error('Canvas is empty');
                 return;
             }
-            fileUrl && window.URL.revokeObjectURL(fileUrl);
-            fileUrl = window.URL.createObjectURL(blob);
             setCroppedImage(blob);
-            setCroppedImageUrl(fileUrl);
         }, 'image/jpeg');
     }, [imageRef.current, crop])
 
-    const onSave = useCallback(() => onCrop(croppedImageUrl!, croppedImage!),
-        [croppedImageUrl])
+    const onSave = useCallback(() => onCrop(croppedImage),
+        [croppedImage])
 
     return <>
       <ReactCrop

@@ -8,10 +8,11 @@ type Props = {
 }
 
 export const TranscodingProgress: FC<Props> = ({ uid }) => {
-  const [percentage, setPercentage] = useState(0)
-  useTranscoding(uid)
+  const [percentage, setPercentage] = useState(100)
+  // useTranscoding(uid)
 
   const tick = async () => {
+    console.log('tick')
     const { data: { status, percentage } } = await getTranscoding({ uid })
     if (status === 'failure') throw 'failure'
     percentage && setPercentage(percentage)
@@ -26,6 +27,6 @@ export const TranscodingProgress: FC<Props> = ({ uid }) => {
   }, [percentage, tick])
 
   return <>
-    <LinearProgress variant="determinate" color="secondary" value={percentage} />
+    <LinearProgress variant="determinate" color="secondary" value={10} />
   </>
 }
