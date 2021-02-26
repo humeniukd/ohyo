@@ -21,10 +21,11 @@ export const Upload: FC = () => {
       [uploadedFile],
   )
 
-  const onArtworkSave = async (file: Blob) => {
-    const res = await artwork('872d21ea84f5c74119757357e48c6559', file)
+  const onArtworkSave = useCallback(
+    async (file: Blob) => {
+    const res = await artwork(data?.key!, file)
     console.log('asdf', res)
-  }
+  }, [data?.key])
 
   return <Layout>
     <Grid
@@ -37,7 +38,7 @@ export const Upload: FC = () => {
     {uploadedFile ? <>
       <UploadProgress data={data!} file={uploadedFile} />
       <ImageChooser onSave={onArtworkSave} />
-      <TrackDetails key={data?.key} />
+      <TrackDetails id={data?.key!} />
     </> : <FilePicker pick={handlePick} />}
     </Grid>
   </Layout>

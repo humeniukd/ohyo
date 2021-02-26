@@ -4,12 +4,12 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import { useTranscoding } from './hooks/useTranscoding'
 
 type Props = {
-  uid?: string
+  uid: string
 }
 
 export const TranscodingProgress: FC<Props> = ({ uid }) => {
-  const [percentage, setPercentage] = useState(100)
-  // useTranscoding(uid)
+  const [percentage, setPercentage] = useState(0)
+  useTranscoding(uid)
 
   const tick = async () => {
     console.log('tick')
@@ -27,6 +27,6 @@ export const TranscodingProgress: FC<Props> = ({ uid }) => {
   }, [percentage, tick])
 
   return <>
-    <LinearProgress variant="determinate" color="secondary" value={10} />
+    <LinearProgress variant="determinate" color="secondary" value={percentage} />
   </>
 }

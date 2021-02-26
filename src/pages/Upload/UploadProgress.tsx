@@ -15,11 +15,11 @@ type Props = {
 export const UploadProgress: FC<Props> = ({ file, data }) => {
   const { grid } = useStyles()
 
-  const [progress, setProgress] = useState(100)
+  const [progress, setProgress] = useState(0)
 
-    // useEffect(() => {
-    //     data && uploadFileToS3(data, file, setProgress)
-    // }, [file, data])
+    useEffect(() => {
+        data && uploadFileToS3(data, file, setProgress)
+    }, [file, data])
 
   return <>
     <Grid
@@ -29,10 +29,10 @@ export const UploadProgress: FC<Props> = ({ file, data }) => {
         className={grid}
     >
       <Box width="50%">
-        <LinearProgress variant="determinate" value={10} />
+        <LinearProgress variant="determinate" value={progress} />
       </Box>
       <Box width="50%">
-        { progress === 100 && <TranscodingProgress uid={'data!.key'} /> }
+        { progress === 100 && <TranscodingProgress uid={data!.key} /> }
       </Box>
     </Grid>
   </>

@@ -20,14 +20,18 @@ const validationSchema = Yup.object().shape({
   description: Yup.string().required('Required'),
 })
 
-export const TrackDetails: FC = () => {
+type Props = { id: string }
+
+export const TrackDetails: FC<Props> = ({ id }) => {
   const [mutate] = useMutation(track)
-  const handleSubmit = useCallback((track) => {
-    mutate({
-      id: '872d21ea84f5c74119757357e48c6559',
+  const handleSubmit = useCallback(async (track) => {
+    console.log('asdf', id)
+    await mutate({
+      id,
       ...track
     })
-  }, [])
+    console.log('Saved!')
+  }, [id])
 
   const formik = useFormik({
     initialValues: {
